@@ -1,0 +1,30 @@
+{
+  "name": "mocha-mongodb",
+  "version": "0.0.1",
+  "description": "MongoDB helper for Mocha",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha test/*-spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jpstevens/mocha-mongodb.git"
+  },
+  "author": "Jack Stevens <jack@applyr.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpstevens/mocha-mongodb/issues"
+  },
+  "homepage": "https://github.com/jpstevens/mocha-mongodb",
+  "peerDependencies": {
+    "mocha": "*"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.0.1"
+  },
+  "dependencies": {
+    "mongodb": "^1.4.23",
+    "mongojs": "^0.18.0"
+  }
+}
