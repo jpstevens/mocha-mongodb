@@ -1,2 +1,2 @@
 global.expect = require('chai').expect;
-global.db = require('../lib/mocha-mongodb');
+global.db = require('../lib');
