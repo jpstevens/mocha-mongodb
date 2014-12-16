@@ -39,6 +39,11 @@ db.connect(_MONGO_URL_)` where `_MONGO_URL_` is your MongoDB database URL.
 
 ### create(collection, object)
 
+**Alias**
+```
+add(collection, query)
+```
+
 **Description**
 Create a new object in a collection. Runs in a "beforeEach" block.
 
@@ -51,6 +56,11 @@ db.create('user', {
 ```
 
 ### remove(collection, query)
+
+**Alias**
+```
+delete(collection, query)
+```
 
 **Description**
 Remove objects from a collection. Runs in a "beforeEach" block.
