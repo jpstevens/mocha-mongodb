@@ -6,8 +6,8 @@ MongoDB helper for Mocha. Useful for seeding data for API tests.
 
 ## Installation
 
-```
-npm install mocha-mongodb
+```bash
+npm install mocha-mongodb --save-dev
 ```
 
 ## Example Usage
@@ -16,68 +16,72 @@ npm install mocha-mongodb
 var db = require('mocha-mongodb');
 
 describe('some test', function () {
-  db.connect('mongodb://localhost/test'); // this will assign the mongodb instance to this.db
+  db.connect('mongodb://localhost/test');
+  db.dropDb();
   db.create('users', {
     name: 'Name Goes Here'
   });
   it('works', function () {
-    this.db.users.find({}, function (err, user) {
-      // do stuff here
-    });
+    // do stuff here
   });
 });
 ```
 ## Methods
 
-### connect(mongoUrl)
+### connect(mongoUrl, [options={}])
 
-**Description**
-Connect to the specified database. Runs in a "before" block.
+  **Description**
+  Connect to the specified database. Runs in a "before" block. Assigns the database connection instance to `this.db`. Can take an optional `options` object (see below).
 
-**Example**
-```
-db.connect(_MONGO_URL_)` where `_MONGO_URL_` is your MongoDB database URL.
-```
+  **Example**
+  ```javascript
+  db.connect(process.env.MONGO_URL, { lib: 'mongojs' })
+  before(function () {
+    this.db.users.find({}, function (err, users) {
+      // do stuff here
+    });
+  });
+  ```
 
-### create(collection, object)
+  **Options**
 
-**Alias**
-```
-add(collection, query)
-```
+  - `lib` - Which library to use for MongoDB, either [`mongojs`](https://www.npmjs.com/package/mongojs) or [`mongodb`](https://www.npmjs.com/package/mongodb) (default `mongodb`)
 
-**Description**
-Create a new object in a collection. Runs in a "beforeEach" block.
+  ### create(collection, query)
 
-**Example**
-```
-db.create('user', {
-  firstName: 'John',
-  lastName: 'Smith'
-})
-```
+  **Alias**
+  `add`, `create`
 
-### remove(collection, query)
+  **Description**
+  Create a new object in a collection. Runs in a "beforeEach" block.
 
-**Alias**
-```
-delete(collection, query)
-```
+  **Example**
+  ```javascript
+  db.create('user', { firstName: 'John', lastName: 'Smith' });
+  // db.add('user', { firstName: 'John', lastName: 'Smith' });
+  ```
 
-**Description**
-Remove objects from a collection. Runs in a "beforeEach" block.
+  ### remove(collection, query)
 
-**Example**
-```
-db.remove('user', { firstName: 'John' });`
-```
+  **Alias**
+  `delete`, `remove`
 
-## dropDb()
+  **Description**
+  Remove objects from a collection. Runs in a "beforeEach" block.
 
-**Description**
-Drops the current database. Runs in a "beforeEach" block.
+  **Example**
+  ```javascript
+  db.remove('user', { firstName: 'John' });
+  // db.delete('user', { firstName: 'John' });
+  ```
 
-**Example**
-```
-db.dropDb();
-```
+  ## dropDb()
+
+  **Description**
+  Drops the current database. Runs in a "beforeEach" block.
+
+  **Example**
+  ```javascript
+  db.dropDb();
+  ```
+  
