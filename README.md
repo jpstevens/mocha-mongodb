@@ -16,12 +16,14 @@ npm install mocha-mongodb
 var db = require('mocha-mongodb');
 
 describe('some test', function () {
-  db.connect('mongodb://localhost/test');
+  db.connect('mongodb://localhost/test'); // this will assign the mongodb instance to this.db
   db.create('users', {
     name: 'Name Goes Here'
   });
   it('works', function () {
-    // test the user here
+    this.db.users.find({}, function (err, user) {
+      // do stuff here
+    });
   });
 });
 ```
